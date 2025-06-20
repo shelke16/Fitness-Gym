@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Contact Us - Fit N Fine</title>
+</head>
+<body style="background-color: black; color: white; text-align: center; font-family: sans-serif; padding: 50px;">
+  <h1>📞 Contact Us</h1>
+
+  <form id="contactForm" style="margin-top: 30px;">
+    <input type="text" name="name" placeholder="Your Name" required style="padding: 10px; width: 300px;"><br><br>
+    <input type="email" name="email" placeholder="Your Email" required style="padding: 10px; width: 300px;"><br><br>
+    <textarea name="message" placeholder="Your Message" rows="5" required style="padding: 10px; width: 300px;"></textarea><br><br>
+    <button type="submit" style="padding: 10px 30px; background-color: red; color: white; border: none;">Send Message</button>
+  </form>
+
+  <script>
+    document.getElementById('contactForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      const formData = new FormData(this);
+
+      fetch('/contact', {
+        method: 'POST',
+        body: new URLSearchParams(formData)
+      })
+      .then(res => res.text())
+      .then(data => {
+        alert(data);
+        this.reset();
+      });
+    });
+  </script>
+</body>
+
+</html>

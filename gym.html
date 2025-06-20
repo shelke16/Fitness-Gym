@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fitness gym</title>
+    <link rel="stylesheet" href="gym.css">
+</head>
+<body>
+    <nav>
+        <h1><span>Fit</span> N <span>Fine</span></h1>
+        <ul>
+           <li><a href="gym.html">HOME</a></li>
+           <li><a href="offer.html">OFFER</a></li>
+           <li><a href="near.html">NEAR GYM</a></li>
+           <li><a href="contact.html">CONTACT</a></li>
+           <button onclick="location.href='learnmore.html'">Learn More</button>
+
+        </ul>   
+    </nav>
+
+    <div class="container">
+        <div class="text">            
+            <h1>FITNESS CLUB.</h1>
+            <p>If you want something you've never had, you must be willing<br>
+               to do somethings you've never done</p>
+             <button id="showFormBtn">Join Now</button>
+
+<!-- Join Now Form -->
+<div id="formContainer" style="display: none; text-align: left; margin-top: 20px;">
+  <form id="joinForm">
+    <input type="text" name="name" placeholder="Enter your name" required><br><br>
+    <input type="email" name="email" placeholder="Enter your email" required><br><br>
+    <button type="submit">Submit</button>
+  </form>
+</div>
+
+  
+          
+        </div>
+    </div>
+<script>
+  document.getElementById('showFormBtn').addEventListener('click', function () {
+    const form = document.getElementById('formContainer');
+    if (form.style.display === 'none') {
+      form.style.display = 'block';
+    } else {
+      form.style.display = 'none';
+    }
+  });
+
+  document.getElementById('joinForm').addEventListener('submit', function (e) {
+    e.preventDefault(); // ✅ Prevent default form submission
+
+    const formData = new FormData(this);
+
+    fetch('/join', {
+      method: 'POST',
+      body: new URLSearchParams(formData)
+    })
+    .then(res => res.text())
+    .then(data => {
+      alert(data);
+      this.reset();
+      document.getElementById('formContainer').style.display = 'none'; // ✅ Hide form after submit
+    });
+  });
+</script>
+
+
+</body>
+</html>
